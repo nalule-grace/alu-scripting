@@ -43,13 +43,3 @@ def recurse(subreddit, hot_list=None, after=None, count=0):
         return (recurse(subreddit, hot_list, after, count))
     except Exception:
         return
-    
-
-if __name__ == '__main__':
-    import sys
-    
-    result = recurse(sys.argv[1])
-    if result is not None:
-        print(len(result))
-    else:
-        print("None")
