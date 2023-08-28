@@ -43,4 +43,4 @@ def recurse(subreddit, hot_list=None, after=None, count=0):
         return (recurse(subreddit, hot_list, after, count))
     except Exception:
         return
-    
+   
