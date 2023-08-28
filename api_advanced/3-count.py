@@ -70,5 +70,5 @@ def count_words(subreddit, word_list, after=None, count={}):
         if result != []:
             for printing in result:
                 print(printing)
-        return
+        return None
     return (count_words(subreddit, word_list, after, count))
