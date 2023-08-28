@@ -6,39 +6,6 @@ to parse title of all hot article and print sorted count
 
 
 def count_words(subreddit, word_list, after=None, count={}):
-    """
-    queries the Reddit API
-    parses title of all hot articles
-    prints sorted count of given keywords
-    """
-    import json
-    import requests
-    if after is None:
-        sub_URL = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
-    else:
-        sub_URL = 'https://www.reddit.com/r/{}/hot.json?after={}'.format(
-            subreddit, after)
-    subreddit_info = requests.get(sub_URL,
-                                  headers={"user-agent": "user"},
-                                  allow_redirects=False)
-    for word in word_list:
-        word = word.lower()
-        if word not in count.keys():
-            count[word] = 0
-    try:
-        data = subreddit_info.json().get("data")
-    except:
-        return
-    if data is None:
-        return
-    children = data.get("children")
-    for child in children:
-        title = (child.get("data").get("title").lower())
-        title = title.split(' ')
-        for word in word_list:
-            word = word.lower()
-            count[word] += title.count(word)
-    after = data.get("after")
     if after is None:
         result = []
         for k in count.keys():
@@ -71,4 +38,5 @@ def count_words(subreddit, word_list, after=None, count={}):
             for printing in result:
                 print(printing)
         return
-    return (count_words(subreddit, word_list, after, count))
+    else:
+        return count_words(subreddit, word_list, after, count)
