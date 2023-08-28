@@ -9,12 +9,14 @@ import json
 import requests
 
 
-def recurse(subreddit, hot_list=[], after=None, count=0):
+def recurse(subreddit, hot_list=None, after=None, count=0):
     '''
     queries REDDDIT API returns list of titles
     of hot for subreddit
     '''
-    
+    if hot_list is None:
+        hot_list = []
+
     try:
         if after is None:
             subreddit_URL = 'https://www.reddit.com/r/{}/hot.json'.format(
@@ -40,4 +42,4 @@ def recurse(subreddit, hot_list=[], after=None, count=0):
             return hot_list
         return (recurse(subreddit, hot_list, after, count))
     except Exception:
-        return
+        return None
